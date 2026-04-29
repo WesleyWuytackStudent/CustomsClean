@@ -1,0 +1,239 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  font-family: Arial, sans-serif;
+}
+/* Fixed Nav Bar */
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 60px;
+  background: rgba(0, 0, 0, 0.8);
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 40px;
+  backdrop-filter: blur(10px);
+}
+.logo {
+  color: white;
+  font-size: 1.8rem;
+  font-weight: bold;
+  display: flex;
+  list-style: none;
+  gap: 30px;
+}
+.nav-links {
+  display: flex;
+  list-style: none;
+  gap: 30px;
+}
+.nav-links a {
+  color: white;
+  text-decoration: none;
+  font-size: 1.1rem;
+  transition: color 0.3s;
+}
+.nav-links a:hover {
+  color: #007bff;
+}
+
+.logo a {
+  color: white;
+  text-decoration: none;
+  font-size: 1.1rem;
+  transition: color 0.3s;
+}
+.logo a:hover {
+  color: #007bff;
+}
+
+/* Hero met padding voor nav */
+.hero {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  padding-top: 60px; /* Ruimte voor nav */
+  overflow: hidden;
+}
+.after-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 1;
+}
+.before-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 2;
+  clip-path: inset(0 50% 0 0);
+  transition: clip-path 0.1s ease-out;
+}
+
+.hero-bg {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  margin-top: 60px; /* nav hoogte */
+}
+
+.bg-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 1;
+}
+
+.hero-overlay {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  text-align: center;
+  color: white;
+  background: rgba(0, 0, 0, 0.4); /* overlay voor leesbaarheid */
+  padding: 0 20px;
+}
+
+.cta-buttons {
+  margin-top: 30px;
+  gap: 20px;
+}
+
+.btn-primary,
+.btn-secondary {
+  padding: 15px 30px;
+  border-radius: 5px;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.btn-primary {
+  background: #007bff;
+  color: white;
+}
+
+.btn-secondary {
+  border: 2px solid white;
+  color: white;
+}
+
+/* .split-line {
+        position: fixed;
+        top: 60px;
+        left: 50%;
+        width: 4px;
+        height: calc(100vh - 60px);
+        background: rgba(255, 255, 255, 1);
+        z-index: 10;
+        box-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+        transition: left 0.1s ease-out;
+      }
+      .split-handle {
+        position: absolute;
+        top: 50%;
+        left: -10px;
+        width: 24px;
+        height: 24px;
+        background: rgba(255, 255, 255, 0.9);
+        border-radius: 50%;
+        transform: translateY(-50%);
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+      } */
+.title {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  font-size: 3rem;
+  text-align: center;
+  z-index: 5;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+}
+@media (max-width: 768px) {
+  .nav-links {
+    gap: 20px;
+  }
+  .title {
+    font-size: 2rem;
+  }
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 80px 20px;
+}
+/* .hero {
+  background: url("./img/propere_oprit_bg.png");
+  background-size: cover;
+  height: 60vh;
+  display: flex;
+  align-items: center;
+} */
+.overview-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+}
+.hero-services {
+  background:
+    linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+    url("./img/propere_oprit_bg.png");
+  background-size: cover;
+  background-position: center;
+}
+
+.services-grid {
+  padding: 100px 0;
+}
+
+.service-card {
+  text-align: center;
+  padding: 40px 20px;
+  border-radius: 10px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s;
+}
+
+.service-card:hover {
+  transform: translateY(-10px);
+}
+
+.service-card img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 10px;
+  margin-bottom: 20px;
+}
+
+.price-tag {
+  background: #007bff;
+  color: white;
+  padding: 8px 16px;
+  border-radius: 20px;
+  display: inline-block;
+  margin: 20px 0;
+}
