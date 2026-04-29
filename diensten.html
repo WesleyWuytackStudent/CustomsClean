@@ -1,0 +1,222 @@
+<!doctype html>
+<html lang="nl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./style.css" />
+    <title>Onze Diensten | CustomsClean</title>
+  </head>
+  <body>
+    <nav class="navbar">
+      <div class="logo"><a href="index.html">CustomsClean</a></div>
+      <ul class="nav-links">
+        <li><a href="./home.html">Home</a></li>
+        <li><a href="./diensten.html">Diensten</a></li>
+        <li><a href="./particulieren.html">Particulieren</a></li>
+        <li><a href="./ondernemers.html">Ondernemers</a></li>
+        <li><a href="./contact.html">Contact</a></li>
+      </ul>
+    </nav>
+
+    <div class="hero diensten-hero">
+      <div class="container hero-content">
+        <h1>Onze Diensten</h1>
+        <p>Professionele reiniging voor particulieren en bedrijven</p>
+
+        <a
+          href="#diensten-content"
+          class="scroll-down"
+          aria-label="Scroll naar beneden"
+        >
+          <span>↓</span>
+        </a>
+      </div>
+    </div>
+
+    <main id="diensten-content" class="container diensten-main">
+      <section class="diensten-grid">
+        <div class="dienst-card offerte">
+          <h2>Terras reinigen</h2>
+          <p>Natuursteen en tegels – wij maken uw terras weer als nieuw.</p>
+          <div class="prijs offerte-prijs">
+            <a href="./prijs.html">Bereken hier uw prijs</a>
+          </div>
+        </div>
+
+        <div class="dienst-card offerte">
+          <h2>Oprit reinigen</h2>
+          <p>Beton, klinkers of kasseien – grondig gereinigd en beschermd.</p>
+          <div class="prijs offerte-prijs">
+            <a href="./prijs.html">Bereken hier uw prijs</a>
+          </div>
+        </div>
+
+        <div class="dienst-card offerte">
+          <h2>Parkings</h2>
+          <p>Veilig en representatief voor uw bedrijf.</p>
+          <div class="prijs offerte-prijs">
+            <a href="./contact.html">Contacteer ons voor meer info</a>
+          </div>
+        </div>
+
+        <div class="dienst-card offerte">
+          <h2>Hangars</h2>
+          <p>Industriële vloeren voor zware vervuiling.</p>
+          <div class="prijs offerte-prijs">
+            <a href="./contact.html">Contacteer ons voor meer info</a>
+          </div>
+        </div>
+      </section>
+
+      <div class="diensten-footer">
+        <p>Voor particulieren en bedrijven in <strong>Vlaanderen</strong></p>
+      </div>
+    </main>
+
+    <style>
+      html {
+        scroll-behavior: smooth;
+      }
+
+      .diensten-hero {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        min-height: 100vh;
+        text-align: center;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 120px 0 60px !important;
+      }
+
+      .hero-content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 16px;
+      }
+
+      .diensten-hero h1 {
+        font-size: 2.8rem;
+        margin-bottom: 12px;
+      }
+
+      .diensten-hero p {
+        font-size: 1.2rem;
+        opacity: 1;
+        margin-bottom: 20px;
+      }
+
+      .scroll-down {
+        width: 56px;
+        height: 56px;
+        border-radius: 50%;
+        border: 2px solid rgba(255, 255, 255, 0.8);
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        text-decoration: none;
+        font-size: 1.8rem;
+        margin-top: 10px;
+        transition:
+          background 0.3s ease,
+          transform 0.3s ease;
+        animation: bounce 1.6s infinite;
+      }
+
+      .scroll-down:hover {
+        background: rgba(255, 255, 255, 0.12);
+        transform: translateY(2px);
+      }
+
+      .diensten-main {
+        padding: 100px 0 80px;
+      }
+
+      .diensten-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 30px;
+        margin-bottom: 60px;
+      }
+
+      .dienst-card {
+        background: white;
+        padding: 40px 30px;
+        border-radius: 20px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        text-align: center;
+        transition:
+          transform 0.3s ease,
+          box-shadow 0.3s ease;
+      }
+
+      .dienst-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+      }
+
+      .dienst-card h2 {
+        color: #333;
+        font-size: 1.8rem;
+        margin-bottom: 15px;
+      }
+
+      .dienst-card p {
+        color: #666;
+        line-height: 1.6;
+        margin-bottom: 25px;
+      }
+
+      .prijs {
+        font-size: 1.1rem;
+        font-weight: bold;
+        color: #667eea;
+        background: #f8f9ff;
+        padding: 12px 24px;
+        border-radius: 50px;
+        display: inline-block;
+      }
+
+      .offerte .offerte-prijs {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+      }
+
+      .diensten-footer {
+        text-align: center;
+        font-size: 1.3rem;
+        color: #666;
+        padding: 40px;
+        background: #f8f9ff;
+        border-radius: 15px;
+      }
+
+      .prijs a {
+        color: white;
+        text-decoration: none;
+      }
+
+      @keyframes bounce {
+        0%,
+        100% {
+          transform: translateY(0);
+        }
+        50% {
+          transform: translateY(8px);
+        }
+      }
+
+      @media (max-width: 768px) {
+        .diensten-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .diensten-hero h1 {
+          font-size: 2.2rem;
+        }
+      }
+    </style>
+  </body>
+</html>

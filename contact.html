@@ -1,0 +1,373 @@
+<!doctype html>
+<html lang="nl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./style.css" />
+    <title>Contact | CustomsClean</title>
+  </head>
+  <body>
+    <nav class="navbar">
+      <div class="logo"><a href="index.html">CustomsClean</a></div>
+      <ul class="nav-links">
+        <li><a href="./home.html">Home</a></li>
+        <li><a href="./diensten.html">Diensten</a></li>
+        <li><a href="./particulieren.html">Particulieren</a></li>
+        <li><a href="./ondernemers.html">Ondernemers</a></li>
+        <li><a href="./contact.html">Contact</a></li>
+      </ul>
+    </nav>
+
+    <div class="hero contact-hero">
+      <div class="container hero-content">
+        <h1>Contacteer CustomsClean</h1>
+        <p>Kom langs of bel ons vrijblijvend</p>
+
+        <a
+          href="#contact-content"
+          class="scroll-down"
+          aria-label="Scroll naar contactgegevens"
+        >
+          <span>↓</span>
+        </a>
+      </div>
+    </div>
+
+    <main id="contact-content" class="container contact-main">
+      <section class="intro-contact">
+        <p>
+          Wij helpen je graag verder met een offerte op maat of beantwoorden al
+          je vragen.
+        </p>
+      </section>
+
+      <section class="contact-grid">
+        <div class="contact-info">
+          <h2>Onze gegevens</h2>
+
+          <div class="bedrijf-info">
+            <h3>CustomsClean</h3>
+            <div class="adres">📍 Stationsstraat 45, 9000 Gent</div>
+            <div class="telefoon">
+              📞 <a href="tel:+32485123456">+32 485 12 34 56</a>
+            </div>
+            <div class="email">
+              ✉️ <a href="mailto:info@CustomsClean">info@CustomsClean</a>
+            </div>
+          </div>
+
+          <div class="openingstijden">
+            <h4>Openingstijden:</h4>
+            <p>
+              <strong>Ma-Vr:</strong> 8u-19u | <strong>Za:</strong> 9u-16u |
+              <strong>Zo:</strong> gesloten
+            </p>
+            <p>
+              <strong>Servicegebied:</strong> Gent, Sint-Niklaas, Lokeren,
+              Dendermonde en omliggende gemeenten
+            </p>
+          </div>
+        </div>
+
+        <div class="contact-form-placeholder">
+          <div class="form-cta">
+            <h3>Vraag direct je offerte aan</h3>
+            <p>Offerteformulier</p>
+            <p>
+              Kies hieronder wat je wilt laten reinigen en krijg binnen 24u een
+              vrijblijvende prijs:
+            </p>
+            <a href="./prijs.html" class="cta-button full-width">
+              Klik hier voor prijs berekenen →
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <section class="direct-contact">
+        <h2>Of bel ons direct</h2>
+        <p>Heb je een dringende vraag of wil je snel een afspraak?</p>
+        <div class="telefoon-knop">
+          <a href="tel:+32485123456" class="direct-bel-knop"
+            >+32 485 12 34 56</a
+          >
+        </div>
+        <p>
+          We zijn meestal binnen 2 uur bereikbaar en sturen een bevestiging per
+          SMS.
+        </p>
+      </section>
+
+      <section class="wat-we-doen">
+        <h2>Wat kunnen we voor jou doen?</h2>
+        <div class="diensten-grid">
+          <div class="dienst-item">
+            <strong>Particulieren:</strong> Terras en oprit reinigen
+          </div>
+          <div class="dienst-item">
+            <strong>Bedrijven:</strong> Parking, hangar of bedrijfsoprit
+          </div>
+          <div class="dienst-item">
+            <strong>Offerte op maat:</strong> Gratis plaatsbezoek
+          </div>
+          <div class="dienst-item">
+            <strong>Onderhoudscontracten:</strong> Vaste prijs, vaste data
+          </div>
+        </div>
+        <div class="reactietijd">
+          <strong>Reactietijd: Binnen 24 uur (werkdagen)</strong>
+        </div>
+      </section>
+    </main>
+
+    <style>
+      html {
+        scroll-behavior: smooth;
+      }
+
+      .contact-hero {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        min-height: 100vh;
+        text-align: center;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 120px 0 60px !important;
+      }
+
+      .hero-content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 16px;
+      }
+
+      .contact-hero h1 {
+        font-size: 2.8rem;
+        margin-bottom: 12px;
+      }
+
+      .contact-hero p {
+        font-size: 1.2rem;
+        opacity: 1;
+        margin-bottom: 20px;
+      }
+
+      .scroll-down {
+        width: 56px;
+        height: 56px;
+        border-radius: 50%;
+        border: 2px solid rgba(255, 255, 255, 0.8);
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        text-decoration: none;
+        font-size: 1.8rem;
+        margin-top: 10px;
+        transition:
+          background 0.3s ease,
+          transform 0.3s ease;
+        animation: bounce 1.6s infinite;
+      }
+
+      .scroll-down:hover {
+        background: rgba(255, 255, 255, 0.12);
+        transform: translateY(2px);
+      }
+
+      .contact-main {
+        padding: 80px 0;
+      }
+
+      .intro-contact {
+        max-width: 700px;
+        margin: 0 auto 60px;
+        font-size: 1.2rem;
+        text-align: center;
+        line-height: 1.7;
+      }
+
+      .contact-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 60px;
+        margin-bottom: 80px;
+        align-items: start;
+      }
+
+      .contact-info h2,
+      .direct-contact h2,
+      .wat-we-doen h2 {
+        font-size: 2.2rem;
+        color: #333;
+        margin-bottom: 30px;
+        text-align: center;
+      }
+
+      .bedrijf-info {
+        background: white;
+        padding: 40px;
+        border-radius: 20px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        margin-bottom: 30px;
+      }
+
+      .bedrijf-info h3 {
+        color: #667eea;
+        margin-bottom: 20px;
+        font-size: 1.6rem;
+      }
+
+      .adres,
+      .telefoon,
+      .email {
+        font-size: 1.2rem;
+        margin-bottom: 15px;
+      }
+
+      .telefoon a,
+      .email a {
+        color: #667eea;
+        text-decoration: none;
+        font-weight: 600;
+      }
+
+      .telefoon a:hover,
+      .email a:hover {
+        text-decoration: underline;
+      }
+
+      .openingstijden {
+        background: #f8f9ff;
+        padding: 30px;
+        border-radius: 15px;
+        border-left: 5px solid #667eea;
+      }
+
+      .openingstijden h4 {
+        color: #333;
+        margin-bottom: 15px;
+        font-size: 1.3rem;
+      }
+
+      .contact-form-placeholder {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 400px;
+      }
+
+      .form-cta {
+        text-align: center;
+        background: white;
+        padding: 50px 40px;
+        border-radius: 20px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        max-width: 420px;
+      }
+
+      .form-cta h3 {
+        color: #333;
+        margin-bottom: 10px;
+      }
+
+      .form-cta p {
+        color: #666;
+        margin-bottom: 25px;
+      }
+
+      .cta-button.full-width {
+        width: 100%;
+        padding: 18px 20px;
+      }
+
+      .direct-contact {
+        text-align: center;
+        margin: 80px 0;
+      }
+
+      .telefoon-knop {
+        margin: 30px 0;
+      }
+
+      .direct-bel-knop {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white !important;
+        padding: 20px 40px;
+        border-radius: 50px;
+        font-weight: bold;
+        font-size: 1.5rem;
+        text-decoration: none;
+        box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
+        display: inline-block;
+        transition: all 0.3s ease;
+      }
+
+      .direct-bel-knop:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 15px 40px rgba(102, 126, 234, 0.5);
+      }
+
+      .diensten-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 20px;
+        max-width: 800px;
+        margin: 0 auto 30px;
+      }
+
+      .dienst-item {
+        background: #f8f9ff;
+        padding: 25px;
+        border-radius: 12px;
+        border-left: 5px solid #667eea;
+        text-align: center;
+      }
+
+      .reactietijd {
+        text-align: center;
+        font-size: 1.3rem;
+        color: #667eea;
+        font-weight: bold;
+        background: #f0f4ff;
+        padding: 25px;
+        border-radius: 12px;
+        margin: 0 auto;
+        max-width: 400px;
+      }
+
+      @keyframes bounce {
+        0%,
+        100% {
+          transform: translateY(0);
+        }
+        50% {
+          transform: translateY(8px);
+        }
+      }
+
+      @media (max-width: 768px) {
+        .contact-grid {
+          grid-template-columns: 1fr;
+          gap: 40px;
+        }
+
+        .contact-hero h1 {
+          font-size: 2.2rem;
+        }
+
+        .direct-bel-knop {
+          padding: 18px 30px;
+          font-size: 1.3rem;
+        }
+
+        .bedrijf-info,
+        .form-cta {
+          padding: 24px;
+        }
+      }
+    </style>
+  </body>
+</html>

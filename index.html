@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="nl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./style.css" />
+    <title>CustomsClean</title>
+  </head>
+  <body>
+    <nav class="navbar">
+      <div class="logo"><a href="index.html">CustomsClean</a></div>
+      <ul class="nav-links">
+        <li><a href="./home.html">Home</a></li>
+        <li><a href="./diensten.html">Diensten</a></li>
+        <li><a href="./particulieren.html">Particulieren</a></li>
+        <li><a href="./ondernemers.html">Ondernemers</a></li>
+        <li><a href="./contact.html">Contact</a></li>
+      </ul>
+    </nav>
+
+    <div class="hero">
+      <img src="./img/vuile_tegel.png" alt="Vuile" class="after-image" />
+      <img src="./img/propere_tegel.png" alt="Propere" class="before-image" />
+      <div class="title">CustomsClean</div>
+      <div class="split-line">
+        <div class="split-handle"></div>
+      </div>
+    </div>
+
+    <script>
+      const beforeImage = document.querySelector(".before-image");
+      const splitLine = document.querySelector(".split-line");
+      const hero = document.querySelector(".hero");
+
+      hero.addEventListener("mousemove", (e) => {
+        const rect = hero.getBoundingClientRect();
+        const mouseX = e.clientX - rect.left;
+        const percentX = (mouseX / rect.width) * 100;
+
+        splitLine.style.left = percentX + "%";
+        beforeImage.style.clipPath = `inset(0 ${100 - percentX}% 0 0)`;
+      });
+    </script>
+  </body>
+</html>

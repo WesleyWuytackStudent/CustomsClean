@@ -1,0 +1,324 @@
+<!doctype html>
+<html lang="nl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./style.css" />
+    <title>Prijs berekenen | CustomsClean</title>
+  </head>
+  <body>
+    <nav class="navbar">
+      <div class="logo"><a href="index.html">CustomsClean</a></div>
+      <ul class="nav-links">
+        <li><a href="./home.html">Home</a></li>
+        <li><a href="./diensten.html">Diensten</a></li>
+        <li><a href="./particulieren.html">Particulieren</a></li>
+        <li><a href="./ondernemers.html">Ondernemers</a></li>
+        <li><a href="./contact.html">Contact</a></li>
+      </ul>
+    </nav>
+
+    <div class="hero price-hero">
+      <div class="container">
+        <h1>Prijs berekenen</h1>
+        <p>Vul per materiaal de oppervlakte in voor een snelle indicatie</p>
+      </div>
+
+      <div class="price-overlay">
+        <div class="price-block">
+          <h2>Prijstool</h2>
+
+          <div class="price-form">
+            <div class="price-row">
+              <div>
+                <div class="service-title">Beton</div>
+                <div class="service-price" id="prijs-beton"></div>
+              </div>
+              <label>
+                <span class="sr-only">Beton oppervlakte</span>
+                <input
+                  type="number"
+                  id="opp-beton"
+                  min="0"
+                  step="0.1"
+                  placeholder="m²"
+                />
+              </label>
+              <div id="subtotaal-beton">€ 0,00</div>
+            </div>
+
+            <div class="price-row">
+              <div>
+                <div class="service-title">Klinkers</div>
+                <div class="service-price" id="prijs-klinkers"></div>
+              </div>
+              <label>
+                <span class="sr-only">Klinkers oppervlakte</span>
+                <input
+                  type="number"
+                  id="opp-klinkers"
+                  min="0"
+                  step="0.1"
+                  placeholder="m²"
+                />
+              </label>
+              <div id="subtotaal-klinkers">€ 0,00</div>
+            </div>
+
+            <div class="price-row">
+              <div>
+                <div class="service-title">Natuursteen</div>
+                <div class="service-price" id="prijs-natuursteen"></div>
+              </div>
+              <label>
+                <span class="sr-only">Natuursteen oppervlakte</span>
+                <input
+                  type="number"
+                  id="opp-natuursteen"
+                  min="0"
+                  step="0.1"
+                  placeholder="m²"
+                />
+              </label>
+              <div id="subtotaal-natuursteen">€ 0,00</div>
+            </div>
+
+            <div class="price-row">
+              <div>
+                <div class="service-title">Asfalt</div>
+                <div class="service-price" id="prijs-asfalt"></div>
+              </div>
+              <label>
+                <span class="sr-only">Asfalt oppervlakte</span>
+                <input
+                  type="number"
+                  id="opp-asfalt"
+                  min="0"
+                  step="0.1"
+                  placeholder="m²"
+                />
+              </label>
+              <div id="subtotaal-asfalt">€ 0,00</div>
+            </div>
+
+            <div class="price-row">
+              <div>
+                <div class="service-title">Kasseien</div>
+                <div class="service-price" id="prijs-kasseien"></div>
+              </div>
+              <label>
+                <span class="sr-only">Kasseien oppervlakte</span>
+                <input
+                  type="number"
+                  id="opp-kasseien"
+                  min="0"
+                  step="0.1"
+                  placeholder="m²"
+                />
+              </label>
+              <div id="subtotaal-kasseien">€ 0,00</div>
+            </div>
+
+            <div class="price-row">
+              <div>
+                <div class="service-title">Hout</div>
+                <div class="service-price" id="prijs-hout"></div>
+              </div>
+              <label>
+                <span class="sr-only">Hout oppervlakte</span>
+                <input
+                  type="number"
+                  id="opp-hout"
+                  min="0"
+                  step="0.1"
+                  placeholder="m²"
+                />
+              </label>
+              <div id="subtotaal-hout">€ 0,00</div>
+            </div>
+
+            <div class="result">
+              <span>Totaalprijs:</span>
+              <span class="prijs" id="prijs">€0</span>
+            </div>
+
+            <div class="footnote">
+              <span
+                >Er wordt een startbedrag van €120 aangerekend voor vaste
+                kosten</span
+              >
+            </div>
+            <!-- <button type="button" onclick="berekenPrijs()">Bereken prijs</button> -->
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      const PRIJZEN = {
+        beton: 2,
+        klinkers: 3,
+        natuursteen: 4,
+        asfalt: 4.5,
+        kasseien: 3,
+        hout: 4,
+      };
+
+      function euro(bedrag) {
+        return new Intl.NumberFormat("nl-BE", {
+          style: "currency",
+          currency: "EUR",
+        }).format(bedrag || 0);
+      }
+
+      function getWaarde(id) {
+        const waarde = parseFloat(document.getElementById(id).value);
+        return Number.isFinite(waarde) && waarde > 0 ? waarde : 0;
+      }
+
+      function toonPrijzenPerM2() {
+        Object.entries(PRIJZEN).forEach(([materiaal, prijs]) => {
+          document.getElementById(`prijs-${materiaal}`).textContent =
+            `${euro(prijs)} / m²`;
+        });
+      }
+
+      function berekenPrijs() {
+        let starttarief = 120;
+        let totaal = starttarief;
+
+        Object.keys(PRIJZEN).forEach((materiaal) => {
+          const opp = getWaarde(`opp-${materiaal}`);
+          const subtotaal = opp * PRIJZEN[materiaal];
+          totaal += subtotaal;
+          document.getElementById(`subtotaal-${materiaal}`).textContent =
+            euro(subtotaal);
+        });
+
+        document.getElementById("prijs").textContent = euro(totaal);
+      }
+
+      toonPrijzenPerM2();
+      berekenPrijs();
+
+      document
+        .querySelectorAll('.price-form input[type="number"]')
+        .forEach((input) => {
+          input.addEventListener("input", berekenPrijs);
+        });
+    </script>
+
+    <style>
+      .price-hero {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: black;
+        padding: 110px 0 140px;
+        text-align: center;
+        position: relative;
+        min-height: 100vh;
+        display: flex;
+        align-items: flex-start;
+        justify-content: center;
+      }
+
+      .price-hero .container {
+        margin-top: 30px;
+      }
+
+      .price-hero h1 {
+        font-size: 2.8rem;
+        margin-bottom: 12px;
+      }
+
+      .price-hero p {
+        font-size: 1.2rem;
+        opacity: 1;
+        margin-bottom: 28px;
+      }
+
+      .price-overlay {
+        position: absolute;
+        top: 48%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background: white;
+        border-radius: 20px;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+        padding: 40px;
+        max-width: 650px;
+        width: 92%;
+        z-index: 10;
+      }
+
+      .price-block h2 {
+        color: #333;
+        margin-bottom: 10px;
+      }
+
+      .price-block p {
+        color: #666;
+        margin-bottom: 24px;
+      }
+
+      .price-form label {
+        display: block;
+        margin-bottom: 15px;
+        font-weight: 500;
+      }
+
+      .price-row {
+        display: grid;
+        grid-template-columns: 1.2fr 120px 110px;
+        gap: 12px;
+        align-items: center;
+        margin-bottom: 14px;
+      }
+
+      .price-form input[type="number"] {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+      }
+
+      .result {
+        font-size: 1.3rem;
+        font-weight: bold;
+        margin: 20px 0;
+        color: #667eea;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      button {
+        background: #667eea;
+        color: black;
+        padding: 12px 30px;
+        border: none;
+        border-radius: 8px;
+        font-size: 1.1rem;
+        cursor: pointer;
+        width: 100%;
+      }
+
+      button:hover {
+        background: #764ba2;
+      }
+
+      @media (max-width: 768px) {
+        .price-overlay {
+          position: relative;
+          top: auto;
+          left: auto;
+          transform: none;
+          margin: 20px auto 0;
+        }
+
+        .price-row {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </body>
+</html>

@@ -1,0 +1,319 @@
+<!doctype html>
+<html lang="nl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./style.css" />
+    <title>Particulieren | CustomsClean</title>
+  </head>
+  <body>
+    <nav class="navbar">
+      <div class="logo"><a href="index.html">CustomsClean</a></div>
+      <ul class="nav-links">
+        <li><a href="./home.html">Home</a></li>
+        <li><a href="./diensten.html">Diensten</a></li>
+        <li><a href="./particulieren.html">Particulieren</a></li>
+        <li><a href="./ondernemers.html">Ondernemers</a></li>
+        <li><a href="./contact.html">Contact</a></li>
+      </ul>
+    </nav>
+
+    <div class="hero particulieren-hero">
+      <div class="container hero-content">
+        <h1>Voor Particulieren</h1>
+        <p>Maak uw terras en oprit weer als nieuw</p>
+
+        <a
+          href="#particulieren-content"
+          class="scroll-down"
+          aria-label="Scroll naar beneden"
+        >
+          <span>↓</span>
+        </a>
+      </div>
+    </div>
+
+    <main id="particulieren-content" class="container particulieren-main">
+      <section class="intro-sectie">
+        <p>
+          Wij komen bij u thuis voor een grondige reiniging van uw terras en
+          oprit. Geen gedoe met huren van een hogedrukreiniger – wij doen het
+          werk professioneel en schadevrij.
+        </p>
+      </section>
+
+      <section class="wat-we-doen">
+        <h2>Wat we doen:</h2>
+        <div class="diensten-lijst">
+          <div class="dienst-item">
+            <strong>Terras reinigen €3,50/m²:</strong> Natuursteen en tegels
+            weer stralend schoon
+          </div>
+          <div class="dienst-item">
+            <strong>Oprit reinigen €4,00/m²:</strong> Beton, klinkers en
+            kasseien
+          </div>
+          <div class="dienst-item">
+            <strong>Impregneren €1,50/m²:</strong> Beschermt 1 jaar tegen mos en
+            vuil
+          </div>
+        </div>
+      </section>
+
+      <section class="waarom-keuze">
+        <h2>Waarom kiezen voor ons?</h2>
+        <ul>
+          <li>Snelle, schone uitvoering (1 dag voor gemiddeld terras)</li>
+          <li>Geen risico voor uw bestrating (lage druk techniek)</li>
+          <li>Flexibele planning: avond, weekend of dag</li>
+          <li>Minimale wachttijd voor afspraak</li>
+        </ul>
+      </section>
+
+      <section class="klant-reviews">
+        <h2>Wat zeggen onze klanten?</h2>
+
+        <div class="review">
+          <div class="review-header">
+            <span class="sterren">⭐⭐⭐⭐⭐</span>
+            <span>"Perfect resultaat!"</span>
+          </div>
+          <p>
+            "Mijn klinker oprit zag er 10 jaar oud uit, na 1 dag als nieuw. De
+            prijs was eerlijk en ze ruimden alles netjes op. Volgend jaar
+            opnieuw!"
+          </p>
+          <div class="review-auteur">– Kristof D., Sint-Niklaas-Waas</div>
+        </div>
+
+        <div class="review">
+          <div class="review-header">
+            <span class="sterren">⭐⭐⭐⭐⭐</span>
+            <span>"Eindelijk proper!"</span>
+          </div>
+          <p>
+            "Terras was zwart van mos. Nu ziet het er uit als toen het nieuw
+            was. Ze hebben zelfs de voegen proper gemaakt. Super!"
+          </p>
+          <div class="review-auteur">– Anja V., Gentbrugge</div>
+        </div>
+
+        <div class="review">
+          <div class="review-header">
+            <span class="sterren">⭐⭐⭐⭐⭐</span>
+            <span>"Aanrader!"</span>
+          </div>
+          <p>
+            "50m² oprit + impregneren voor €240. Doen ze buiten openingsuren van
+            onze parking. Klanten merken het verschil meteen."
+          </p>
+          <div class="review-auteur">– Tom B., zaakvoerder café, Gent</div>
+        </div>
+      </section>
+
+      <div class="cta-sectie">
+        <a href="./prijs.html" class="cta-button">
+          Bereken uw prijs in 30 seconden →
+        </a>
+      </div>
+    </main>
+
+    <style>
+      html {
+        scroll-behavior: smooth;
+      }
+
+      .particulieren-hero {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        min-height: 100vh;
+        text-align: center;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 120px 0 60px !important;
+      }
+
+      .hero-content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 16px;
+      }
+
+      .particulieren-hero h1 {
+        font-size: 2.8rem;
+        margin-bottom: 12px;
+      }
+
+      .particulieren-hero p {
+        font-size: 1.2rem;
+        opacity: 1;
+        margin-bottom: 20px;
+      }
+
+      .scroll-down {
+        width: 56px;
+        height: 56px;
+        border-radius: 50%;
+        border: 2px solid rgba(255, 255, 255, 0.8);
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        text-decoration: none;
+        font-size: 1.8rem;
+        margin-top: 10px;
+        transition:
+          background 0.3s ease,
+          transform 0.3s ease;
+        animation: bounce 1.6s infinite;
+      }
+
+      .scroll-down:hover {
+        background: rgba(255, 255, 255, 0.12);
+        transform: translateY(2px);
+      }
+
+      .particulieren-main {
+        padding: 80px 0;
+      }
+
+      .intro-sectie {
+        max-width: 700px;
+        margin: 0 auto 60px;
+        font-size: 1.2rem;
+        line-height: 1.7;
+      }
+
+      .wat-we-doen,
+      .waarom-keuze,
+      .klant-reviews {
+        margin-bottom: 80px;
+      }
+
+      .wat-we-doen h2,
+      .waarom-keuze h2,
+      .klant-reviews h2 {
+        font-size: 2.2rem;
+        color: #333;
+        margin-bottom: 30px;
+        text-align: center;
+      }
+
+      .diensten-lijst {
+        display: grid;
+        gap: 20px;
+        max-width: 600px;
+        margin: 0 auto;
+      }
+
+      .dienst-item {
+        background: #f8f9ff;
+        padding: 25px;
+        border-radius: 12px;
+        border-left: 5px solid #667eea;
+      }
+
+      .waarom-keuze ul {
+        max-width: 500px;
+        margin: 0 auto;
+        list-style: none;
+        padding: 0;
+      }
+
+      .waarom-keuze li {
+        background: white;
+        margin-bottom: 15px;
+        padding: 20px 25px;
+        border-radius: 10px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+        font-size: 1.1rem;
+      }
+
+      .review {
+        background: white;
+        padding: 30px;
+        border-radius: 15px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        margin-bottom: 30px;
+      }
+
+      .review-header {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        margin-bottom: 15px;
+      }
+
+      .sterren {
+        font-size: 1.3rem;
+      }
+
+      .review-header span {
+        font-weight: bold;
+        font-size: 1.1rem;
+      }
+
+      .review p {
+        color: #555;
+        line-height: 1.6;
+        margin-bottom: 15px;
+      }
+
+      .review-auteur {
+        font-style: italic;
+        color: #667eea;
+        font-weight: 500;
+      }
+
+      .cta-sectie {
+        text-align: center;
+        margin: 60px 0;
+      }
+
+      .cta-button {
+        display: inline-block;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        padding: 18px 40px;
+        font-size: 1.3rem;
+        font-weight: bold;
+        text-decoration: none;
+        border-radius: 50px;
+        box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
+        transition: all 0.3s ease;
+      }
+
+      .cta-button:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 15px 40px rgba(102, 126, 234, 0.5);
+      }
+
+      @keyframes bounce {
+        0%,
+        100% {
+          transform: translateY(0);
+        }
+        50% {
+          transform: translateY(8px);
+        }
+      }
+
+      @media (max-width: 768px) {
+        .particulieren-hero h1 {
+          font-size: 2.2rem;
+        }
+
+        .diensten-lijst,
+        .waarom-keuze ul {
+          max-width: 100%;
+        }
+
+        .review {
+          padding: 20px;
+        }
+      }
+    </style>
+  </body>
+</html>
