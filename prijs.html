@@ -3,322 +3,823 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="./style.css" />
-    <title>Prijs berekenen | CustomsClean</title>
-  </head>
-  <body>
-    <nav class="navbar">
-      <div class="logo"><a href="index.html">CustomsClean</a></div>
-      <ul class="nav-links">
-        <li><a href="./home.html">Home</a></li>
-        <li><a href="./diensten.html">Diensten</a></li>
-        <li><a href="./particulieren.html">Particulieren</a></li>
-        <li><a href="./ondernemers.html">Ondernemers</a></li>
-        <li><a href="./contact.html">Contact</a></li>
-      </ul>
-    </nav>
-
-    <div class="hero price-hero">
-      <div class="container">
-        <h1>Prijs berekenen</h1>
-        <p>Vul per materiaal de oppervlakte in voor een snelle indicatie</p>
-      </div>
-
-      <div class="price-overlay">
-        <div class="price-block">
-          <h2>Prijstool</h2>
-
-          <div class="price-form">
-            <div class="price-row">
-              <div>
-                <div class="service-title">Beton</div>
-                <div class="service-price" id="prijs-beton"></div>
-              </div>
-              <label>
-                <span class="sr-only">Beton oppervlakte</span>
-                <input
-                  type="number"
-                  id="opp-beton"
-                  min="0"
-                  step="0.1"
-                  placeholder="m²"
-                />
-              </label>
-              <div id="subtotaal-beton">€ 0,00</div>
-            </div>
-
-            <div class="price-row">
-              <div>
-                <div class="service-title">Klinkers</div>
-                <div class="service-price" id="prijs-klinkers"></div>
-              </div>
-              <label>
-                <span class="sr-only">Klinkers oppervlakte</span>
-                <input
-                  type="number"
-                  id="opp-klinkers"
-                  min="0"
-                  step="0.1"
-                  placeholder="m²"
-                />
-              </label>
-              <div id="subtotaal-klinkers">€ 0,00</div>
-            </div>
-
-            <div class="price-row">
-              <div>
-                <div class="service-title">Natuursteen</div>
-                <div class="service-price" id="prijs-natuursteen"></div>
-              </div>
-              <label>
-                <span class="sr-only">Natuursteen oppervlakte</span>
-                <input
-                  type="number"
-                  id="opp-natuursteen"
-                  min="0"
-                  step="0.1"
-                  placeholder="m²"
-                />
-              </label>
-              <div id="subtotaal-natuursteen">€ 0,00</div>
-            </div>
-
-            <div class="price-row">
-              <div>
-                <div class="service-title">Asfalt</div>
-                <div class="service-price" id="prijs-asfalt"></div>
-              </div>
-              <label>
-                <span class="sr-only">Asfalt oppervlakte</span>
-                <input
-                  type="number"
-                  id="opp-asfalt"
-                  min="0"
-                  step="0.1"
-                  placeholder="m²"
-                />
-              </label>
-              <div id="subtotaal-asfalt">€ 0,00</div>
-            </div>
-
-            <div class="price-row">
-              <div>
-                <div class="service-title">Kasseien</div>
-                <div class="service-price" id="prijs-kasseien"></div>
-              </div>
-              <label>
-                <span class="sr-only">Kasseien oppervlakte</span>
-                <input
-                  type="number"
-                  id="opp-kasseien"
-                  min="0"
-                  step="0.1"
-                  placeholder="m²"
-                />
-              </label>
-              <div id="subtotaal-kasseien">€ 0,00</div>
-            </div>
-
-            <div class="price-row">
-              <div>
-                <div class="service-title">Hout</div>
-                <div class="service-price" id="prijs-hout"></div>
-              </div>
-              <label>
-                <span class="sr-only">Hout oppervlakte</span>
-                <input
-                  type="number"
-                  id="opp-hout"
-                  min="0"
-                  step="0.1"
-                  placeholder="m²"
-                />
-              </label>
-              <div id="subtotaal-hout">€ 0,00</div>
-            </div>
-
-            <div class="result">
-              <span>Totaalprijs:</span>
-              <span class="prijs" id="prijs">€0</span>
-            </div>
-
-            <div class="footnote">
-              <span
-                >Er wordt een startbedrag van €120 aangerekend voor vaste
-                kosten</span
-              >
-            </div>
-            <!-- <button type="button" onclick="berekenPrijs()">Bereken prijs</button> -->
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <script>
-      const PRIJZEN = {
-        beton: 2,
-        klinkers: 3,
-        natuursteen: 4,
-        asfalt: 4.5,
-        kasseien: 3,
-        hout: 4,
-      };
-
-      function euro(bedrag) {
-        return new Intl.NumberFormat("nl-BE", {
-          style: "currency",
-          currency: "EUR",
-        }).format(bedrag || 0);
-      }
-
-      function getWaarde(id) {
-        const waarde = parseFloat(document.getElementById(id).value);
-        return Number.isFinite(waarde) && waarde > 0 ? waarde : 0;
-      }
-
-      function toonPrijzenPerM2() {
-        Object.entries(PRIJZEN).forEach(([materiaal, prijs]) => {
-          document.getElementById(`prijs-${materiaal}`).textContent =
-            `${euro(prijs)} / m²`;
-        });
-      }
-
-      function berekenPrijs() {
-        let starttarief = 120;
-        let totaal = starttarief;
-
-        Object.keys(PRIJZEN).forEach((materiaal) => {
-          const opp = getWaarde(`opp-${materiaal}`);
-          const subtotaal = opp * PRIJZEN[materiaal];
-          totaal += subtotaal;
-          document.getElementById(`subtotaal-${materiaal}`).textContent =
-            euro(subtotaal);
-        });
-
-        document.getElementById("prijs").textContent = euro(totaal);
-      }
-
-      toonPrijzenPerM2();
-      berekenPrijs();
-
-      document
-        .querySelectorAll('.price-form input[type="number"]')
-        .forEach((input) => {
-          input.addEventListener("input", berekenPrijs);
-        });
-    </script>
-
+    <title>Offerte aanvragen - CustomsClean</title>
+    <link rel="stylesheet" href="style.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <style>
-      .price-hero {
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        color: black;
-        padding: 110px 0 140px;
+      body {
+        background: #f5f7fa;
+        color: #1f2937;
+      }
+      .page-wrap {
+        padding-top: 100px;
+        padding-bottom: 60px;
+      }
+      .page-header {
         text-align: center;
-        position: relative;
-        min-height: 100vh;
-        display: flex;
-        align-items: flex-start;
-        justify-content: center;
+        margin-bottom: 40px;
       }
-
-      .price-hero .container {
-        margin-top: 30px;
-      }
-
-      .price-hero h1 {
-        font-size: 2.8rem;
-        margin-bottom: 12px;
-      }
-
-      .price-hero p {
-        font-size: 1.2rem;
-        opacity: 1;
-        margin-bottom: 28px;
-      }
-
-      .price-overlay {
-        position: absolute;
-        top: 48%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        background: white;
-        border-radius: 20px;
-        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
-        padding: 40px;
-        max-width: 650px;
-        width: 92%;
-        z-index: 10;
-      }
-
-      .price-block h2 {
-        color: #333;
+      .page-header h1 {
+        font-size: 2.5rem;
         margin-bottom: 10px;
       }
-
-      .price-block p {
-        color: #666;
-        margin-bottom: 24px;
+      .page-header p {
+        color: #6b7280;
+        font-size: 1.05rem;
+        max-width: 700px;
+        margin: 0 auto;
       }
-
-      .price-form label {
-        display: block;
+      .quote-layout {
+        display: grid;
+        grid-template-columns: 1.2fr 0.8fr;
+        gap: 30px;
+        align-items: start;
+      }
+      .form-card,
+      .summary-card {
+        background: white;
+        border-radius: 16px;
+        padding: 30px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+      }
+      .form-section {
+        margin-bottom: 30px;
+      }
+      .form-section h2 {
+        font-size: 1.3rem;
         margin-bottom: 15px;
+        color: #111827;
+      }
+      .form-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 18px;
+      }
+      .form-group {
+        display: flex;
+        flex-direction: column;
+      }
+      .form-group.full {
+        grid-column: 1 / -1;
+      }
+      label {
+        font-weight: 600;
+        margin-bottom: 8px;
+        color: #374151;
+      }
+      input,
+      select {
+        padding: 14px 16px;
+        border: 1px solid #d1d5db;
+        border-radius: 10px;
+        font-size: 1rem;
+        background: #fff;
+      }
+      input:focus,
+      select:focus {
+        outline: none;
+        border-color: #007bff;
+        box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.15);
+      }
+      .radio-row,
+      .checkbox-row {
+        display: flex;
+        gap: 20px;
+        flex-wrap: wrap;
+        margin-top: 8px;
+      }
+      .radio-option,
+      .checkbox-option {
+        display: flex;
+        align-items: center;
+        gap: 10px;
         font-weight: 500;
       }
-
-      .price-row {
+      .radio-option input,
+      .checkbox-option input {
+        width: auto;
+        margin: 0;
+      }
+      .materials-grid {
         display: grid;
-        grid-template-columns: 1.2fr 120px 110px;
-        gap: 12px;
-        align-items: center;
-        margin-bottom: 14px;
+        grid-template-columns: 1fr 1fr;
+        gap: 16px;
       }
-
-      .price-form input[type="number"] {
-        width: 100%;
-        padding: 10px;
-        border: 1px solid #ddd;
-        border-radius: 8px;
+      .material-card {
+        border: 1px solid #e5e7eb;
+        border-radius: 12px;
+        padding: 16px;
+        background: #f9fafb;
       }
-
-      .result {
-        font-size: 1.3rem;
-        font-weight: bold;
-        margin: 20px 0;
-        color: #667eea;
+      .material-card h3 {
+        margin-bottom: 6px;
+        font-size: 1rem;
+        color: #111827;
+      }
+      .material-rate {
+        font-size: 0.95rem;
+        color: #6b7280;
+        margin-bottom: 12px;
+      }
+      .summary-card {
+        position: sticky;
+        top: 100px;
+      }
+      .summary-card h2 {
+        font-size: 1.4rem;
+        margin-bottom: 10px;
+      }
+      .summary-subtitle {
+        color: #6b7280;
+        margin-bottom: 20px;
+      }
+      .summary-block {
+        margin-bottom: 24px;
+        padding-bottom: 20px;
+        border-bottom: 1px solid #e5e7eb;
+      }
+      .summary-block:last-of-type {
+        border-bottom: none;
+        padding-bottom: 0;
+      }
+      .summary-line,
+      .total-line {
         display: flex;
         justify-content: space-between;
-        align-items: center;
+        gap: 20px;
+        margin-bottom: 10px;
       }
-
-      button {
-        background: #667eea;
-        color: black;
-        padding: 12px 30px;
+      .materials-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+      }
+      .materials-list li {
+        display: flex;
+        justify-content: space-between;
+        gap: 20px;
+        padding: 10px 0;
+        border-bottom: 1px dashed #e5e7eb;
+        font-size: 0.98rem;
+      }
+      .materials-list li:last-child {
+        border-bottom: none;
+      }
+      .empty-state {
+        color: #6b7280;
+        font-style: italic;
+      }
+      .totals-box {
+        background: #f3f8ff;
+        border: 1px solid #cfe3ff;
+        border-radius: 12px;
+        padding: 18px;
+        margin-top: 20px;
+      }
+      .grand-total {
+        font-size: 1.3rem;
+        font-weight: 700;
+        color: #007bff;
+        margin-top: 12px;
+        display: flex;
+        justify-content: space-between;
+      }
+      .submit-row {
+        margin-top: 30px;
+        display: flex;
+        gap: 15px;
+        flex-wrap: wrap;
+      }
+      .submit-row button {
         border: none;
-        border-radius: 8px;
-        font-size: 1.1rem;
         cursor: pointer;
-        width: 100%;
+        font-size: 1rem;
       }
-
-      button:hover {
-        background: #764ba2;
+      .note {
+        margin-top: 12px;
+        color: #6b7280;
+        font-size: 0.95rem;
       }
-
-      @media (max-width: 768px) {
-        .price-overlay {
-          position: relative;
-          top: auto;
-          left: auto;
-          transform: none;
-          margin: 20px auto 0;
-        }
-
-        .price-row {
+      .success-message {
+        margin-top: 20px;
+        padding: 16px 18px;
+        border-radius: 12px;
+        background: #ecfdf3;
+        color: #166534;
+        border: 1px solid #bbf7d0;
+        display: none;
+      }
+      .warning-message {
+        margin-top: 16px;
+        padding: 14px 16px;
+        border-radius: 12px;
+        background: #fff4e5;
+        border: 1px solid #f5c27a;
+        color: #9a5b00;
+        font-weight: 600;
+      }
+      button:disabled,
+      .btn-primary:disabled {
+        opacity: 0.55;
+        cursor: not-allowed;
+        pointer-events: none;
+      }
+      @media (max-width: 900px) {
+        .quote-layout,
+        .form-grid,
+        .materials-grid {
           grid-template-columns: 1fr;
+        }
+        .summary-card {
+          position: static;
+        }
+        .page-header h1 {
+          font-size: 2rem;
         }
       }
     </style>
+  </head>
+  <body>
+    <nav class="navbar">
+      <div class="logo"><a href="home.html">CustomsClean</a></div>
+      <ul class="nav-links">
+        <li><a href="home.html">Home</a></li>
+        <li><a href="diensten.html">Diensten</a></li>
+        <li><a href="particulieren.html">Particulieren</a></li>
+        <li><a href="ondernemers.html">Ondernemers</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+
+    <main class="page-wrap">
+      <div class="container">
+        <div class="page-header">
+          <h1>Vraag je offerte aan</h1>
+          <p>
+            Vul je gegevens en oppervlaktes in. Download daarna meteen een nette
+            offerte als PDF.
+          </p>
+        </div>
+
+        <div class="quote-layout">
+          <section class="form-card">
+            <form id="quoteForm">
+              <div class="form-section">
+                <h2>Klantgegevens</h2>
+                <div class="form-grid">
+                  <div class="form-group full">
+                    <label for="naam">Naam</label>
+                    <input
+                      type="text"
+                      id="naam"
+                      name="naam"
+                      placeholder="Voor- en achternaam"
+                      required
+                    />
+                  </div>
+                  <div class="form-group full">
+                    <label for="adres">Adres</label>
+                    <input
+                      type="text"
+                      id="adres"
+                      name="adres"
+                      placeholder="Straat + huisnummer"
+                      required
+                    />
+                  </div>
+                  <div class="form-group">
+                    <label for="postcode">Postcode</label>
+                    <input
+                      type="text"
+                      id="postcode"
+                      name="postcode"
+                      placeholder="9000"
+                      required
+                    />
+                  </div>
+                  <div class="form-group">
+                    <label for="gemeente">Gemeente</label>
+                    <input
+                      type="text"
+                      id="gemeente"
+                      name="gemeente"
+                      placeholder="Gent"
+                      required
+                    />
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-section">
+                <h2>Type klant</h2>
+                <div class="radio-row">
+                  <label class="radio-option">
+                    <input
+                      type="radio"
+                      name="klanttype"
+                      value="Particulier"
+                      checked
+                    />
+                    <span>Particulier</span>
+                  </label>
+                  <label class="radio-option">
+                    <input type="radio" name="klanttype" value="Bedrijf" />
+                    <span>Bedrijf</span>
+                  </label>
+                </div>
+              </div>
+
+              <div class="form-section">
+                <h2>Oppervlakte per materiaal</h2>
+                <div class="materials-grid">
+                  <div class="material-card">
+                    <h3>Beton</h3>
+                    <!-- <div class="material-rate">€6 per m²</div> -->
+                    <input
+                      type="number"
+                      min="0"
+                      step="0.1"
+                      data-materiaal="Beton"
+                      data-prijs="6"
+                      placeholder="Aantal m²"
+                    />
+                  </div>
+                  <div class="material-card">
+                    <h3>Klinkers</h3>
+                    <!-- <div class="material-rate">€5 per m²</div> -->
+                    <input
+                      type="number"
+                      min="0"
+                      step="0.1"
+                      data-materiaal="Klinkers"
+                      data-prijs="5"
+                      placeholder="Aantal m²"
+                    />
+                  </div>
+                  <div class="material-card">
+                    <h3>Natuursteen</h3>
+                    <!-- <div class="material-rate">€7 per m²</div> -->
+                    <input
+                      type="number"
+                      min="0"
+                      step="0.1"
+                      data-materiaal="Natuursteen"
+                      data-prijs="7"
+                      placeholder="Aantal m²"
+                    />
+                  </div>
+                  <div class="material-card">
+                    <h3>Asfalt</h3>
+                    <!-- <div class="material-rate">€4.5 per m²</div> -->
+                    <input
+                      type="number"
+                      min="0"
+                      step="0.1"
+                      data-materiaal="Asfalt"
+                      data-prijs="4.5"
+                      placeholder="Aantal m²"
+                    />
+                  </div>
+                  <div class="material-card">
+                    <h3>Kasseien</h3>
+                    <!-- <div class="material-rate">€6.5 per m²</div> -->
+                    <input
+                      type="number"
+                      min="0"
+                      step="0.1"
+                      data-materiaal="Kasseien"
+                      data-prijs="6.5"
+                      placeholder="Aantal m²"
+                    />
+                  </div>
+                  <div class="material-card">
+                    <h3>Hout</h3>
+                    <!-- <div class="material-rate">€8 per m²</div> -->
+                    <input
+                      type="number"
+                      min="0"
+                      step="0.1"
+                      data-materiaal="Hout"
+                      data-prijs="8"
+                      placeholder="Aantal m²"
+                    />
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-section">
+                <h2>Praktische info</h2>
+                <div class="checkbox-row">
+                  <label class="checkbox-option">
+                    <input type="checkbox" id="water" name="water" />
+                    <span>Water beschikbaar bij u thuis</span>
+                  </label>
+                </div>
+              </div>
+              <div
+                class="warning-message"
+                id="waterWarning"
+                style="display: none"
+              >
+                Voor een oppervlakte groter dan 100m² moet er water beschikbaar
+                zijn op locatie. Contacteer ons voor verdere vragen.
+              </div>
+              <div class="submit-row">
+                <button type="submit" class="btn-primary" id="submitBtn">
+                  Offerte downloaden als PDF
+                </button>
+                <button
+                  type="button"
+                  class="btn-secondary"
+                  id="resetBtn"
+                  style="color: #007bff; border-color: #007bff"
+                >
+                  Leegmaken
+                </button>
+              </div>
+
+              <p class="note">
+                Voor deze aanvraag wordt de offerte meteen in je browser als PDF
+                opgebouwd en gedownload.
+              </p>
+
+              <div class="success-message" id="successMessage">
+                Je offerte werd gegenereerd en gedownload als PDF.
+              </div>
+            </form>
+          </section>
+
+          <aside class="summary-card">
+            <h2>Offerte-overzicht</h2>
+            <div class="summary-block">
+              <div class="summary-line">
+                <span>Naam</span><strong id="summaryNaam">—</strong>
+              </div>
+              <div class="summary-line">
+                <span>Adres</span><strong id="summaryAdres">—</strong>
+              </div>
+              <div class="summary-line">
+                <span>Postcode + gemeente</span
+                ><strong id="summaryGemeente">—</strong>
+              </div>
+              <div class="summary-line">
+                <span>Klanttype</span
+                ><strong id="summaryKlanttype">Particulier</strong>
+              </div>
+              <div class="summary-line">
+                <span>Water beschikbaar</span
+                ><strong id="summaryWater">Nee</strong>
+              </div>
+            </div>
+
+            <div class="summary-block">
+              <h3 style="margin-bottom: 12px">Materialen</h3>
+              <ul class="materials-list" id="materialsList">
+                <li class="empty-state">Nog geen materialen ingevuld.</li>
+              </ul>
+            </div>
+
+            <!-- <div class="totals-box">
+              <div class="total-line">
+                <span>Subtotaal materialen</span
+                ><strong id="subtotaal">€0,00</strong>
+              </div>
+              <div class="total-line">
+                <span>Startkost</span><strong>€120,00</strong>
+              </div>
+              <div class="grand-total">
+                <span>Totaalprijs</span><span id="totaalPrijs">€120,00</span>
+              </div>
+            </div> -->
+          </aside>
+        </div>
+      </div>
+    </main>
+
+    <script>
+      const STARTKOST = 150;
+      const WATER_TOESLAG = 25;
+
+      const materiaalInputs = document.querySelectorAll("[data-materiaal]");
+      const form = document.getElementById("quoteForm");
+      const resetBtn = document.getElementById("resetBtn");
+      const successMessage = document.getElementById("successMessage");
+      const submitBtn = document.getElementById("submitBtn");
+
+      const naamInput = document.getElementById("naam");
+      const adresInput = document.getElementById("adres");
+      const postcodeInput = document.getElementById("postcode");
+      const gemeenteInput = document.getElementById("gemeente");
+      const waterInput = document.getElementById("water");
+
+      const summaryNaam = document.getElementById("summaryNaam");
+      const summaryAdres = document.getElementById("summaryAdres");
+      const summaryGemeente = document.getElementById("summaryGemeente");
+      const summaryKlanttype = document.getElementById("summaryKlanttype");
+      const summaryWater = document.getElementById("summaryWater");
+      const materialsList = document.getElementById("materialsList");
+
+      const subtotaalEl = document.getElementById("subtotaal");
+      const totaalPrijsEl = document.getElementById("totaalPrijs");
+      const waterToeslagEl = document.getElementById("waterToeslag");
+      const waterWarning = document.getElementById("waterWarning");
+
+      function euro(value) {
+        return new Intl.NumberFormat("nl-BE", {
+          style: "currency",
+          currency: "EUR",
+        }).format(value);
+      }
+
+      function formatM2(value) {
+        return new Intl.NumberFormat("nl-BE", {
+          minimumFractionDigits: 0,
+          maximumFractionDigits: 1,
+        }).format(value);
+      }
+
+      function getKlanttype() {
+        const selected = document.querySelector(
+          'input[name="klanttype"]:checked',
+        );
+        return selected ? selected.value : "Particulier";
+      }
+
+      function collectLines() {
+        let subtotaal = 0;
+        let totaleOppervlakte = 0;
+        const lines = [];
+
+        materiaalInputs.forEach((input) => {
+          const oppervlakte = parseFloat(input.value) || 0;
+          const prijsPerM2 = parseFloat(input.dataset.prijs) || 0;
+          const materiaal = input.dataset.materiaal;
+          const lijnTotaal = oppervlakte * prijsPerM2;
+
+          if (oppervlakte > 0) {
+            subtotaal += lijnTotaal;
+            totaleOppervlakte += oppervlakte;
+            lines.push({
+              materiaal,
+              oppervlakte,
+              prijsPerM2,
+              lijnTotaal,
+            });
+          }
+        });
+
+        const waterToeslag = waterInput.checked ? 0 : WATER_TOESLAG;
+        const totaal = subtotaal + STARTKOST + waterToeslag;
+
+        return {
+          lines,
+          subtotaal,
+          totaleOppervlakte,
+          waterToeslag,
+          totaal,
+        };
+      }
+
+      function updateSummary() {
+        summaryNaam.textContent = naamInput.value.trim() || "—";
+        summaryAdres.textContent = adresInput.value.trim() || "—";
+
+        const postcode = postcodeInput.value.trim();
+        const gemeente = gemeenteInput.value.trim();
+        summaryGemeente.textContent =
+          postcode || gemeente ? `${postcode} ${gemeente}`.trim() : "—";
+
+        summaryKlanttype.textContent = getKlanttype();
+        summaryWater.textContent = waterInput.checked ? "Ja" : "Nee";
+
+        const { lines, subtotaal, totaleOppervlakte, waterToeslag, totaal } =
+          collectLines();
+
+        materialsList.innerHTML = "";
+
+        if (lines.length === 0) {
+          const li = document.createElement("li");
+          li.className = "empty-state";
+          li.textContent = "Nog geen materialen ingevuld.";
+          materialsList.appendChild(li);
+        } else {
+          lines.forEach((line) => {
+            const li = document.createElement("li");
+            li.innerHTML = `<span>${line.materiaal}: ${formatM2(line.oppervlakte)} m²</span>`;
+            materialsList.appendChild(li);
+          });
+        }
+
+        if (subtotaalEl) {
+          subtotaalEl.textContent = euro(subtotaal);
+        }
+
+        if (waterToeslagEl) {
+          waterToeslagEl.textContent = euro(waterToeslag);
+        }
+
+        if (totaalPrijsEl) {
+          totaalPrijsEl.textContent = euro(totaal);
+        }
+
+        const blokkeren = !waterInput.checked && totaleOppervlakte > 100;
+
+        if (waterWarning) {
+          waterWarning.style.display = blokkeren ? "block" : "none";
+        }
+
+        if (submitBtn) {
+          submitBtn.disabled = blokkeren;
+        }
+      }
+
+      function loadImageAsDataURL(url) {
+        return new Promise((resolve, reject) => {
+          const img = new Image();
+
+          img.onload = function () {
+            const canvas = document.createElement("canvas");
+            canvas.width = img.naturalWidth || img.width;
+            canvas.height = img.naturalHeight || img.height;
+            const ctx = canvas.getContext("2d");
+            ctx.drawImage(img, 0, 0);
+            resolve(canvas.toDataURL("image/png"));
+          };
+
+          img.onerror = function (error) {
+            reject(error);
+          };
+
+          img.src = url;
+        });
+      }
+
+      async function generatePdf() {
+        const { jsPDF } = window.jspdf;
+        const doc = new jsPDF();
+
+        const naam = naamInput.value.trim();
+        const adres = adresInput.value.trim();
+        const postcode = postcodeInput.value.trim();
+        const gemeente = gemeenteInput.value.trim();
+        const klanttype = getKlanttype();
+        const water = waterInput.checked ? "Ja" : "Nee";
+
+        const { lines, subtotaal, waterToeslag, totaal, totaleOppervlakte } =
+          collectLines();
+
+        if (!naam || !adres || !postcode || !gemeente) {
+          alert("Vul eerst naam, adres, postcode en gemeente in.");
+          return;
+        }
+
+        if (lines.length === 0) {
+          alert("Vul minstens één materiaaloppervlakte groter dan 0 in.");
+          return;
+        }
+
+        if (!waterInput.checked && totaleOppervlakte > 100) {
+          alert(
+            "Voor een oppervlakte groter dan 100 m² moet er water beschikbaar zijn op locatie.",
+          );
+          return;
+        }
+
+        let logoData = null;
+        try {
+          logoData = await loadImageAsDataURL("./img/Logo.png");
+        } catch (error) {
+          console.warn("Logo kon niet geladen worden:", error);
+        }
+
+        let y = 20;
+
+        doc.setFillColor(68, 64, 49);
+        doc.rect(0, 0, 210, 28, "F");
+
+        if (logoData) {
+          try {
+            const logoWidth = 42;
+            const logoHeight = 18;
+            const x = 210 - logoWidth - 14;
+            const yLogo = 6;
+            doc.addImage(logoData, "PNG", x, yLogo, logoWidth, logoHeight);
+          } catch (error) {
+            console.warn("Logo kon niet in de PDF geplaatst worden:", error);
+          }
+        }
+
+        // doc.setTextColor(255, 255, 255);
+        // doc.setFont("helvetica", "bold");
+        // doc.setFontSize(20);
+        // doc.text("CustomsClean", 14, 18);
+
+        doc.setTextColor(40, 40, 40);
+        doc.setFontSize(11);
+        doc.setFont("helvetica", "normal");
+        y = 40;
+
+        doc.setFontSize(12);
+        doc.setFont("helvetica", "bold");
+        doc.text("Klantgegevens", 14, y);
+        y += 8;
+
+        doc.setFontSize(11);
+        doc.setFont("helvetica", "normal");
+        doc.text(`Naam: ${naam}`, 14, y);
+        y += 7;
+        doc.text(`Adres: ${adres}`, 14, y);
+        y += 7;
+        doc.text(`Postcode/Gemeente: ${postcode} ${gemeente}`, 14, y);
+        y += 7;
+        doc.text(`Klanttype: ${klanttype}`, 14, y);
+        y += 7;
+        doc.text(`Water beschikbaar: ${water}`, 14, y);
+        y += 7;
+        doc.text(
+          `Totale oppervlakte: ${formatM2(totaleOppervlakte)} m²`,
+          14,
+          y,
+        );
+        y += 12;
+
+        doc.setFontSize(12);
+        doc.setFont("helvetica", "bold");
+        doc.text("Overzicht materialen", 14, y);
+        y += 8;
+
+        doc.setDrawColor(220, 220, 220);
+        doc.line(14, y, 196, y);
+        y += 8;
+
+        doc.setFontSize(11);
+        doc.setFont("helvetica", "bold");
+        doc.text("Materiaal", 14, y);
+        doc.text("Oppervlakte", 95, y);
+        y += 6;
+
+        doc.setFont("helvetica", "normal");
+        doc.line(14, y, 196, y);
+        y += 8;
+
+        lines.forEach((line) => {
+          doc.text(line.materiaal, 14, y);
+          doc.text(`${formatM2(line.oppervlakte)} m²`, 95, y);
+          y += 8;
+        });
+
+        y += 4;
+        doc.line(14, y, 196, y);
+        y += 10;
+
+        doc.setFontSize(12);
+        doc.text(`Subtotaal materialen: ${euro(subtotaal)}`, 14, y);
+        y += 8;
+        doc.text(`Starttarief: ${euro(STARTKOST)}`, 14, y);
+        y += 8;
+        doc.text(`Toeslag water: ${euro(waterToeslag)}`, 14, y);
+        y += 8;
+
+        doc.setFont("helvetica", "bold");
+        doc.setFontSize(14);
+        doc.text(`Geschatte totaalprijs: ${euro(totaal)}`, 14, y);
+        y += 16;
+
+        doc.setFontSize(10);
+        doc.setFont("helvetica", "normal");
+        doc.setTextColor(100, 100, 100);
+        doc.text(
+          "Bedankt voor uw aanvraag. Deze offerte werd automatisch gegenereerd voor demo-doeleinden.",
+          14,
+          y,
+        );
+
+        const safeName = naam
+          .toLowerCase()
+          .replace(/[^a-z0-9]+/gi, "-")
+          .replace(/^-|-$/g, "");
+
+        doc.save(`offerte-${safeName || "customsclean"}.pdf`);
+      }
+
+      form.addEventListener("input", updateSummary);
+      form.addEventListener("change", updateSummary);
+
+      form.addEventListener("submit", async function (e) {
+        e.preventDefault();
+        await generatePdf();
+        successMessage.style.display = "block";
+        successMessage.scrollIntoView({ behavior: "smooth", block: "nearest" });
+        updateSummary();
+      });
+
+      resetBtn.addEventListener("click", function () {
+        form.reset();
+        successMessage.style.display = "none";
+        updateSummary();
+      });
+
+      updateSummary();
+    </script>
   </body>
 </html>
