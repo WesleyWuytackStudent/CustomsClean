@@ -774,16 +774,24 @@
         y += 10;
 
         doc.setFontSize(12);
+        const exclBtw = subtotaal + STARTKOST + waterToeslag;
+        const btw = exclBtw * 0.21;
+        const totaalInclBtw = exclBtw + btw;
+
         doc.text(`Subtotaal materialen: ${euro(subtotaal)}`, 14, y);
         y += 8;
         doc.text(`Starttarief: ${euro(STARTKOST)}`, 14, y);
         y += 8;
         doc.text(`Toeslag water: ${euro(waterToeslag)}`, 14, y);
         y += 8;
+        doc.text(`Totaal excl. btw: ${euro(exclBtw)}`, 14, y);
+        y += 8;
+        doc.text(`Btw (21%): ${euro(btw)}`, 14, y);
+        y += 8;
 
         doc.setFont("helvetica", "bold");
         doc.setFontSize(14);
-        doc.text(`Geschatte totaalprijs: ${euro(totaal)}`, 14, y);
+        doc.text(`Geschatte totaalprijs: ${euro(totaalInclBtw)}`, 14, y);
         y += 16;
 
         doc.setFontSize(10);

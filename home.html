@@ -26,15 +26,12 @@
         <li><a href="./contact.html">Contact</a></li>
       </ul>
     </nav>
-    <!-- Onder nav bar: full viewport height background image -->
     <div class="hero-bg">
-      <!-- Je before/after slider images hier -->
       <img
         src="./img/propere_oprit_background.png"
         class="bg-image after"
         alt="Background"
       />
-      <!-- Hero content overlay -->
       <div class="hero-overlay">
         <h1>Professionele reiniging van terrassen, opritten en parkings</h1>
         <p>In Vlaanderen</p>
@@ -50,5 +47,17 @@
   .hero,
   .hero-bg {
     width: 100%;
+  }
+
+  @media (max-width: 480px) {
+    .cta-buttons {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 10px;
+    }
+
+    .cta-buttons a {
+      width: 100%;
+    }
   }
 </style>
